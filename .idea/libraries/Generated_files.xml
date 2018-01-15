@@ -1,0 +1,31 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/dist/build/js/bundle.js" />
+        <item url="file://$PROJECT_DIR$/dist/build/js/vendor.bundle.js" />
+        <item url="file://$PROJECT_DIR$/dist/dist/bundle.js" />
+        <item url="file://$PROJECT_DIR$/dist/src/config.js" />
+        <item url="file://$PROJECT_DIR$/dist/src/main.js" />
+        <item url="file://$PROJECT_DIR$/dist/src/sprites/Mushroom.js" />
+        <item url="file://$PROJECT_DIR$/dist/src/states/Boot.js" />
+        <item url="file://$PROJECT_DIR$/dist/src/states/Game.js" />
+        <item url="file://$PROJECT_DIR$/dist/src/states/Splash.js" />
+        <item url="file://$PROJECT_DIR$/dist/webpack.config.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/dist/build/js/bundle.js" />
+      <root url="file://$PROJECT_DIR$/dist/build/js/vendor.bundle.js" />
+      <root url="file://$PROJECT_DIR$/dist/dist/bundle.js" />
+      <root url="file://$PROJECT_DIR$/dist/src/config.js" />
+      <root url="file://$PROJECT_DIR$/dist/src/main.js" />
+      <root url="file://$PROJECT_DIR$/dist/src/sprites/Mushroom.js" />
+      <root url="file://$PROJECT_DIR$/dist/src/states/Boot.js" />
+      <root url="file://$PROJECT_DIR$/dist/src/states/Game.js" />
+      <root url="file://$PROJECT_DIR$/dist/src/states/Splash.js" />
+      <root url="file://$PROJECT_DIR$/dist/webpack.config.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
