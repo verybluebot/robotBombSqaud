@@ -74,6 +74,7 @@ export default class extends Phaser.State {
     update () {
         this.physics.arcade.collide(this.robot, this.layer);
         this.physics.arcade.collide(this.monsterGroup, this.layer);
+        this.physics.arcade.collide(this.monsterGroup, this.layer, null, this.reverseMonster);
 
         if (Math.abs(this.robot.body.velocity.x) > 0 && this.robot.body.onFloor()) {
             this.robot.animations.play('walk');
@@ -116,9 +117,21 @@ export default class extends Phaser.State {
         }
     }
 
-    getBomb(sprite, tile) {
+    getBomb (sprite, tile) {
         if (sprite.name === 'monster') return;
         this.map.removeTile(tile.x, tile.y, this.layer);
+    }
+
+    reverseMonster (monster, layer) {
+        if (monster.body.blocked.left) {
+            monster.body.velocity.x = 100;
+            monster.scale.x = -1;
+        }
+
+        if (monster.body.blocked.right) {
+            monster.body.velocity.x = -100;
+            monster.scale.x = 1;
+        }
     }
 
     createMonsters () {
@@ -132,6 +145,9 @@ export default class extends Phaser.State {
             monster.body.gravity.y = 200;
             monster.body.collideWorldBounds = true;
             monster.name = 'monster';
+
+            monster.animations.add('move', [0,1], 12, true);
+            monster.animations.play('move');
         }
     }
 }
