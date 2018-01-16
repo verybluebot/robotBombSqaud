@@ -28,8 +28,9 @@ export default class extends Phaser.State {
 
         this.robotScale = 0.7;
         this.gravity = 500;
-        this.jump = 200;
+        this.jump = 250;
         this.numberOfMonsters = 10;
+        this.timeForLevel = 100;
 
         // this.game.add.existing(this.mushroom);
         this.physics.startSystem(Phaser.Physics.ARCADE);
@@ -53,6 +54,16 @@ export default class extends Phaser.State {
         this.robot.body.bounce.set(0.05);
         this.robot.body.collideWorldBounds = true;
 
+        // Timer
+        this.bar2 = this.add.image(0, 0, 'bar2');
+        this.bar1 = this.add.image(0, 0, 'bar1');
+
+        this.timerGroup = this.game.add.group();
+        this.timerGroup.add(this.bar1);
+        this.timerGroup.add(this.bar2);
+        this.timerGroup.fixedToCamera = true;
+        this.timerGroup.cameraOffset.setTo(this.game.width / 2 - this.timerGroup.width / 2);
+
         // create map
         this.map = this.game.add.tilemap('map');
         this.map.addTilesetImage('tiles');
@@ -69,12 +80,16 @@ export default class extends Phaser.State {
         this.map.setTileIndexCallback(25, this.getBomb, this);
 
         this.createMonsters();
+
+        this.game.world.bringToTop(this.timerGroup);
+        this.game.time.events.loop(this.timeForLevel, this.timerUpdate, this);
     }
 
     update () {
         this.physics.arcade.collide(this.robot, this.layer);
         this.physics.arcade.collide(this.monsterGroup, this.layer);
         this.physics.arcade.collide(this.monsterGroup, this.layer, null, this.reverseMonster);
+        this.physics.arcade.collide(this.robot, this.monsterGroup, null, this.monsterHit);
 
         if (Math.abs(this.robot.body.velocity.x) > 0 && this.robot.body.onFloor()) {
             this.robot.animations.play('walk');
@@ -114,6 +129,23 @@ export default class extends Phaser.State {
     render () {
         if (__DEV__) {
             this.game.debug.bodyInfo(this.robot, 20, 20);
+        }
+    }
+
+    timerUpdate () {
+        if (this.bar2.width > 1) {
+            this.bar2.width--;
+        } else {
+            console.log('Time is out game is over');
+        }
+    }
+
+    monsterHit (robot, monster) {
+        if (robot.y < monster.y) {
+            monster.kill();
+            robot.body.velocity.y = -300;
+        } else {
+            console.log('Game is over');
         }
     }
 
